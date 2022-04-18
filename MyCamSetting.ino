@@ -7,7 +7,7 @@
 //#define CAMERA_MODEL_M5STACK_WIDE
 
 #define CAMERA_MODEL_AI_THINKER
-
+//pinの設定は各自でやってください。
 #define PWDN_GPIO_NUM     32
 #define RESET_GPIO_NUM    -1
 #define XCLK_GPIO_NUM      0
