@@ -1,6 +1,7 @@
 #include "esp_camera.h"
 
 // Select camera model
+//自分が使ってるカメラをコメントアウトから外してください。
 //#define CAMERA_MODEL_WROVER_KIT
 //#define CAMERA_MODEL_ESP_EYE
 //#define CAMERA_MODEL_M5STACK_PSRAM
@@ -26,6 +27,7 @@
 #define HREF_GPIO_NUM     23
 #define PCLK_GPIO_NUM     22
 
+//カメラの初期化をします。
 void initCamera(){
   camera_config_t config;
   config.ledc_channel = LEDC_CHANNEL_0;
@@ -48,7 +50,10 @@ void initCamera(){
   config.pin_reset = RESET_GPIO_NUM;
   config.xclk_freq_hz = 20000000;
   config.pixel_format = PIXFORMAT_JPEG;
+  
+  
   //init with high specs to pre-allocate larger buffers
+  //画像を撮るメモリーがあるかチェックしてるらしい。falseだと画質が悪くなるので今回は再起動で調子を見ることにしてます。
   if(psramFound()){
     config.frame_size = FRAMESIZE_UXGA;
     config.jpeg_quality = 5;
@@ -69,7 +74,7 @@ void initCamera(){
     ESP.restart() ;
     return;
   }
-
+　//ここでカメラのパラメーターをセットします。詳しくは別途調べてください。
   sensor_t * s = esp_camera_sensor_get();
   s->set_brightness(s, 0);     // -2 to 2
   s->set_special_effect(s, 0); // 0 to 6 (0 - No Effect, 1 - Negative, 2 - Grayscale, 3 - Red Tint, 4 - Green Tint, 5 - Blue Tint, 6 - Sepia)
@@ -78,8 +83,11 @@ void initCamera(){
   s->set_aec2(s, 1);           // 0 = disable , 1 = enable
   s->set_framesize(s, FRAMESIZE_UXGA);
 }
+//写真を撮ります
 camera_fb_t* capture(bool isFlash,int flash_brightness){
+  //pin12は余っていたのでledをつけています。
   pinMode(12, OUTPUT);
+  //esp32camにもともとあるflashをＰＷＭで制御するためのコードです。chは15じゃないと動きません。
   ledcSetup(15,12800,8);
   ledcAttachPin(A10,15);
   if(isFlash){
