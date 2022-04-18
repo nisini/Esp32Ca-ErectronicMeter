@@ -1,7 +1,6 @@
 #include "esp_camera.h"
 
 // Select camera model
-//自分が使ってるカメラをコメントアウトから外してください。
 //#define CAMERA_MODEL_WROVER_KIT
 //#define CAMERA_MODEL_ESP_EYE
 //#define CAMERA_MODEL_M5STACK_PSRAM
