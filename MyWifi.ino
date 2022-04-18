@@ -1,6 +1,6 @@
 #include <WiFi.h>
-const char* ssid = "TP-Link_47A8";
-const char* password = "84575807";
+const char* ssid = "";
+const char* password = "";
 
 void wifiSetup(){
   WiFi.mode(WIFI_STA);
