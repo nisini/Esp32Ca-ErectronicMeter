@@ -96,6 +96,7 @@ camera_fb_t* capture(bool isFlash,int flash_brightness){
   return fb;
 }
 bool crash_camera_fb_t(camera_fb_t *fb){
+  //撮った画像が正常か確認します。
   if(!fb || fb->format != PIXFORMAT_JPEG){
     return true;
   }else{
