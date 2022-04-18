@@ -28,6 +28,7 @@ void wifiSetup(){
   Serial.print("WiFi connected: ");
   Serial.println(WiFi.localIP());
 }
+//loopで実行してwifiが途切れていないか確認しています。
 void checkWifi(){
   if (WiFi.status() != WL_CONNECTED) {
     WiFi.disconnect(true, true);
